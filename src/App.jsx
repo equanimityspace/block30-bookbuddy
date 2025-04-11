@@ -5,7 +5,7 @@ function App() {
   const [token, setToken] = useState(null);
 
   return (<>
-    <h1>something else</h1>
+    <h1>Something Else</h1>
   </>);
 }
 
