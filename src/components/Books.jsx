@@ -2,7 +2,7 @@ import { useGetAllBooksQuery } from "../app/librarySlice";
 
 export default function Books() {
   const { data: books } = useGetAllBooksQuery();
-  console.log(books);
+  // console.log(books);
   return (
     <div className="m-5">
       <div className="row row-cols-4">
