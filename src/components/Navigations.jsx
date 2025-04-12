@@ -6,8 +6,9 @@ export default function Navigations() {
   const titles = {
     "/": "Welcome!",
     "/singleBook": "Book Details",
-    "/login": "Welcome!",
     "/register": "Create an Account",
+    "/login": "Welcome!",
+    "/account": "My Books",
   };
 
   const pageTitle = titles[location.pathname];
@@ -17,13 +18,11 @@ export default function Navigations() {
       <nav className="navbar">
         <NavLink className="navbar-brand" to="/">
           <img
-            src=""
-            width="30"
-            height="30"
-            class="d-inline-block align-top"
+            src="src\assets\bookbuddylogo.png"
+            className="navbar-logo"
             alt=""
           ></img>
-          Book Buddy
+          <h1>Book Buddy</h1>
         </NavLink>
         <form className="searchbar">
           <input
@@ -32,10 +31,7 @@ export default function Navigations() {
             placeholder="Search all books..."
             aria-label="Search"
           />
-          <button
-            className="btn btn-outline-success my-2 my-sm-0"
-            type="submit"
-          >
+          <button type="button" class="btn btn-outline-light">
             Search
           </button>
         </form>
@@ -45,7 +41,7 @@ export default function Navigations() {
         <div className="mininav dropdown">
           <NavLink
             className="mininav-link dropdown-toggle"
-            href="#"
+            to="/account"
             id="mininavDropdown"
             role="button"
             data-toggle="dropdown"
