@@ -1,13 +1,13 @@
 import api from "../api/api";
-// import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const libraryApi = api.injectEndpoints({
   endpoints: (build) => ({
     // get all books (GET) - Done - Test(Pass)
     // get book details (GET) - Done - Test(Pass)
-    // login (POST) - Done - assumed working
-    // register (POST) - Done - Test(Pass)
-    // account details (GET) - Done
+    // login (POST) - Done - Test(Pass)
+    // register (POST) - Done - Test(Pass) // make sure its not passing in an object
+    // account details (GET) - Done - Test(Pass)
     // get user reservations (GET) - Done
     // reserve book (POST) - Done
     // return book (DELETE) - Done
@@ -95,21 +95,33 @@ const libraryApi = api.injectEndpoints({
   }),
 });
 
-// // User register
-// const storeToken = (state, { payload }) => {
-//   localStorage.setItem("token", payload.token);
-// };
+// Store Token in local storage
+const storeToken = (state, { payload }) => {
+  localStorage.setItem("token", payload.token);
+};
 
-// const registerSlice = createSlice({
-//   name: "register",
-//   initialState: {},
-//   reducers: {},
-//   extraReducers: (builder) => {
-//     builder.addMatcher(api.endpoints.register.matchFulfilled, storeToken);
-//   },
-// });
+// stores the token from register api call
+const registerSlice = createSlice({
+  name: "register",
+  initialState: {},
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addMatcher(api.endpoints.register.matchFulfilled, storeToken);
+  },
+});
 
-// export default registerSlice.reducer;
+// stores the token from login api call
+const loginSlice = createSlice({
+  name: "login",
+  initialState: {},
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addMatcher(api.endpoints.login.matchFulfilled, storeToken);
+  },
+});
+
+export const registerReducer = registerSlice.reducer;
+export const loginReducer = loginSlice.reducer;
 
 export const {
   useGetAllBooksQuery,
