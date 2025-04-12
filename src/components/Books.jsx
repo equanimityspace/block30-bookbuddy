@@ -33,7 +33,7 @@ export default function Books() {
           type="text"
           className="form-control"
           id="bookSearch"
-          placeholder="Find a book"
+          placeholder="Find a book by title or author"
           onChange={(e) => {
             setSearchQuery(e.target.value);
           }}
