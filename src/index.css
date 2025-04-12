@@ -11,3 +11,8 @@ body {
 }
 
 /* Add your own custom styles here */
+
+/* Books.jsx */
+#card {
+  max-width: 40%;
+}
