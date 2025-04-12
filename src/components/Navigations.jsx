@@ -16,7 +16,14 @@ export default function Navigations() {
     <div>
       <nav className="navbar">
         <NavLink className="navbar-brand" to="/">
-          Library Name
+          <img
+            src=""
+            width="30"
+            height="30"
+            class="d-inline-block align-top"
+            alt=""
+          ></img>
+          Book Buddy
         </NavLink>
         <form className="searchbar">
           <input

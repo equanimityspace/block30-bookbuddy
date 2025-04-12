@@ -42,5 +42,6 @@ body {
   font-size: medium;
 }
 .nav-item dropdown {
+  background-color: rgba(13, 155, 37, 0.493);
   justify-content: right;
 }
