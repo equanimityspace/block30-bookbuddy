@@ -16,3 +16,31 @@ body {
 #card {
   max-width: 40%;
 }
+
+/*NavBar styling*/
+.navbar {
+  background-color: rgba(13, 155, 36, 0.767);
+  justify-content: space-around;
+  /* margin: 20px; */
+}
+.searchbar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mininav {
+  background-color: rgba(13, 155, 37, 0.493);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 0rem;
+  align-items: right;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.mininav h1 {
+  font-size: medium;
+}
+.nav-item dropdown {
+  justify-content: right;
+}
