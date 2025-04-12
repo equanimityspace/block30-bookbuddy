@@ -16,3 +16,59 @@ body {
 #card {
   max-width: 40%;
 }
+
+/*Navbar styling*/
+.navbar {
+  background-color: #234f1ece;
+  display: flex;
+  justify-content: space-around;
+}
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+.navbar-logo {
+  height: auto;
+  width: 15%;
+  margin-left: 10px;
+}
+.navbar h1 {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: auto;
+}
+
+.searchbar {
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mininav {
+  background-color: #9b9b9bad;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 0rem;
+  align-items: right;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.mininav h1 {
+  font-size: medium;
+}
+
+/* .mininav dropdown {
+  text-decoration: none;
+  padding: 0;
+  font-size: small;
+}
+.mininav-link dropdown-toggle {
+  text-decoration: none;
+  padding: 0;
+  font-size: small;
+} */
+
+/* .dropdown-menu {
+  font-size: small;
+} */
