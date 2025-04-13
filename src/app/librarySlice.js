@@ -17,6 +17,7 @@ const libraryApi = api.injectEndpoints({
         url: "/books",
         method: "GET",
       }),
+      providesTags: ["Books"],
     }),
     getBookDetails: build.query({
       query: (id) => ({
@@ -80,6 +81,7 @@ const libraryApi = api.injectEndpoints({
           Authorization: `Bearer ${token}`,
         },
       }),
+      invalidatesTags: ["Books"],
     }),
 
     returnBook: build.mutation({
@@ -90,6 +92,7 @@ const libraryApi = api.injectEndpoints({
           Authorization: `Bearer ${token}`,
         },
       }),
+      invalidatesTags: ["Books"],
     }),
   }),
 });
