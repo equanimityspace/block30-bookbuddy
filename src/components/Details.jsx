@@ -6,6 +6,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import InfoModal from "./Modal";
 
 import {
   useGetBookDetailsQuery,
@@ -46,6 +47,11 @@ export default function SingleBook({ book }) {
   } else {
     available = "Not available for check out";
   }
+
+  // show modal
+  const [show, setShow] = useState(false);
+  const openModal = () => setShow(true);
+  const closeModal = () => setShow(false);
 
   return (
     <>
@@ -96,6 +102,7 @@ export default function SingleBook({ book }) {
                 onClick={() => {
                   if (token && reservationId) {
                     returnBook({ token, reservationId });
+                    openModal();
                   }
                 }}
               >
@@ -123,6 +130,14 @@ export default function SingleBook({ book }) {
           </Row>
         </Container>
       )}
+      {/* Variable modal feedback */}
+      <InfoModal
+        show={show}
+        hide={closeModal}
+        heading="Success!"
+        body="Book returned successfully!"
+      />
+      ;
     </>
   );
 }
