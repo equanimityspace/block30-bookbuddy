@@ -1,7 +1,10 @@
-import "../index.css";
+import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import "../index.css";
 
-export default function Navigations() {
+import { useGetAllBooksQuery } from "../app/librarySlice";
+
+export default function Navigations({ setFilteredBooks }) {
   const location = useLocation();
   const titles = {
     "/": "Welcome!",
@@ -10,6 +13,28 @@ export default function Navigations() {
     "/login": "Welcome!",
     "/account": "My Books",
   };
+
+  const { data: books } = useGetAllBooksQuery();
+  const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    const lowerCaseQuery = searchQuery.toLowerCase().trim();
+
+    if (!lowerCaseQuery) {
+      setFilteredBooks(books);
+      return;
+    }
+
+    const results = books.filter((book) => {
+      const titleMatch = book.title.toLowerCase().includes(lowerCaseQuery);
+      const authorMatch = book.author.toLowerCase().includes(lowerCaseQuery);
+
+      // return true if the query matches any of the fields
+      return titleMatch || authorMatch;
+    });
+
+    setFilteredBooks(results);
+  }, [searchQuery, books]); // Re-run effect when query or book list changes
 
   const pageTitle = titles[location.pathname];
 
@@ -28,10 +53,11 @@ export default function Navigations() {
           <input
             className="form-control mr-sm-2"
             type="search"
-            placeholder="Search all books..."
+            placeholder="Search book by title or author"
             aria-label="Search"
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <button type="button" class="btn btn-outline-light">
+          <button type="button" className="btn btn-outline-light">
             Search
           </button>
         </form>
@@ -60,6 +86,3 @@ export default function Navigations() {
     </div>
   );
 }
-
-/* TODO - add your code to create a functional React component that renders a navigation bar for the different views in your single page application. You may consider conditionally rendering some options - for example 'Login' should be available if someone has not logged in yet. */
-// navbar-light bg-light justify-content-between
