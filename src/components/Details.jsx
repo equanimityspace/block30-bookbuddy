@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import Carousel from "react-bootstrap/Carousel";
@@ -15,23 +16,28 @@ import {
 import { getToken } from "../app/tokenService";
 
 export default function SingleBook({ book }) {
+  // get slice components
   const [reserveBook] = useReserveBookMutation();
   const [returnBook] = useReturnBookMutation();
-  const token = getToken();
 
   const { data: bookDetail } = useGetBookDetailsQuery(book);
+
+  const token = getToken();
   const { data: bookReservation } = useGetReservationsQuery(token);
 
+  // get book Id
   const bookId = bookDetail?.id;
+
+  // get reservation object for matching book Id
   const objReservation = bookReservation?.filter(
     (book) => book.bookid === bookId
   );
 
+  // extract reservation Id from rservation object
   let reservationId = 0;
   if (objReservation && objReservation.length !== 0) {
     reservationId = objReservation[0].id;
   }
-  console.log(token, reservationId);
 
   // check if book is available, I should have done this with a prop but I did not think ahead
   let available = "";
