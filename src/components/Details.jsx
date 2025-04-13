@@ -18,10 +18,8 @@ import { getToken } from "../app/tokenService";
 
 export default function Details({ book }) {
   // get slice components
-  const [reserveBook, { isError: reserveError, isLoading: reserveLoading }] =
-    useReserveBookMutation();
-  const [returnBook, { isError: returnError, isLoading: returnLoading }] =
-    useReturnBookMutation();
+  const [reserveBook, { isError: reserveError }] = useReserveBookMutation();
+  const [returnBook, { isError: returnError }] = useReturnBookMutation();
 
   const { data: bookDetail } = useGetBookDetailsQuery(book);
 
