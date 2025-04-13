@@ -83,7 +83,7 @@ const libraryApi = api.injectEndpoints({
     }),
 
     returnBook: build.mutation({
-      query: (token, { reservationId }) => ({
+      query: ({ token, reservationId }) => ({
         url: `/reservations/${reservationId}`,
         method: "DELETE",
         headers: {

@@ -9,14 +9,31 @@ import Button from "react-bootstrap/Button";
 import {
   useGetBookDetailsQuery,
   useReserveBookMutation,
+  useReturnBookMutation,
+  useGetReservationsQuery,
 } from "../app/librarySlice";
 import { getToken } from "../app/tokenService";
 
 export default function SingleBook({ book }) {
   const [reserveBook] = useReserveBookMutation();
-  const { data: bookDetail } = useGetBookDetailsQuery(book);
+  const [returnBook] = useReturnBookMutation();
   const token = getToken();
 
+  const { data: bookDetail } = useGetBookDetailsQuery(book);
+  const { data: bookReservation } = useGetReservationsQuery(token);
+
+  const bookId = bookDetail?.id;
+  const objReservation = bookReservation?.filter(
+    (book) => book.bookid === bookId
+  );
+
+  let reservationId = 0;
+  if (objReservation && objReservation.length !== 0) {
+    reservationId = objReservation[0].id;
+  }
+  console.log(token, reservationId);
+
+  // check if book is available, I should have done this with a prop but I did not think ahead
   let available = "";
   if (bookDetail?.available) {
     available = "Available for check-out";
@@ -68,7 +85,16 @@ export default function SingleBook({ book }) {
         <Container className="d-flex justify-content-center mb-3">
           <Row className="w-50">
             <Col className="text-center">
-              <Button variant="success">Check In</Button>
+              <Button
+                variant="success"
+                onClick={() => {
+                  if (token && reservationId) {
+                    returnBook({ token, reservationId });
+                  }
+                }}
+              >
+                Return
+              </Button>
             </Col>
             <Col className="text-center">
               <Button variant="danger">Check Out</Button>
