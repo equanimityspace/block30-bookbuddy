@@ -1,5 +1,6 @@
 /* TODO - add your code to create a functional React component that renders account details for a logged in user. Fetch the account data from the provided API. You may consider conditionally rendering a message for other users that prompts them to log in or create an account.  */
-import { useGetReservationsQuery, useGetUserQuery } from "../app/librarySlice";
+import { useEffect } from "react";
+import { useGetReservationsQuery, useGetUserQuery, useReturnBookMutation } from "../app/librarySlice";
 import { getToken, deleteToken } from "../app/tokenService";
 import { useNavigate } from "react-router-dom";
 
@@ -13,52 +14,55 @@ export default function Account() {
   // calls api to get user's book reservations
   const { data: userBooks } = useGetReservationsQuery(token);
 
+  // calls api to return book
+  const [returnBook] = useReturnBookMutation();
+
   // ********** FOR TESTING ONLY **********
   console.log("token: ", token);
-  console.log(user);
-  console.log(userBooks);
+  console.log("user: ",user);
+  console.log("userBooks: ",userBooks);
 
   return (
-    <section class="py-3 py-md-5 py-xl-8">
-      <div class="container">
-        <div class="row gy-4 gy-lg-0">
-          <div class="col-12 col-lg-4 col-xl-3">
-            <div class="row gy-4">
-              <div class="col-12">
-                <div class="card widget-card border-light shadow-sm">
-                  <div class="card-header text-bg-primary">
+    <section className="py-3 py-md-5 py-xl-8">
+      <div className="container">
+        <div className="row gy-4 gy-lg-0">
+          <div className="col-12 col-lg-4 col-xl-3">
+            <div className="row gy-4">
+              <div className="col-12">
+                <div className="card widget-card border-light shadow-sm">
+                  <div className="card-header text-bg-primary">
                     Welcome, {user?.firstname} {user?.lastname}
                   </div>
-                  <div class="card-body">
-                    <div class="text-center mb-3">
+                  <div className="card-body">
+                    <div className="text-center mb-3">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="100"
                         height="100"
-                        fill="LightGrey"
-                        class="bi bi-person-circle"
+                        fillRule="LightGrey"
+                        className="bi bi-person-circle"
                         viewBox="0 0 16 16"
                       >
                         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
                         <path
-                          fill-rule="evenodd"
+                          fillRule="evenodd"
                           d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"
                         />
                       </svg>
                     </div>
-                    <h5 class="text-center mb-1">
+                    <h5 className="text-center mb-1">
                       {user?.firstname} {user?.lastname}
                     </h5>
-                    <p class="text-center text-secondary mb-4">{user?.email}</p>
-                    <ul class="list-group list-group-flush mb-4">
-                      <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <h6 class="m-0">Borrowed Books</h6>
+                    <p className="text-center text-secondary mb-4">{user?.email}</p>
+                    <ul className="list-group list-group-flush mb-4">
+                      <li className="list-group-item d-flex justify-content-between align-items-center">
+                        <h6 className="m-0">Borrowed Books</h6>
                         <span>{user?.reservations.length}</span>
                       </li>
                     </ul>
-                    <div class="d-grid m-0">
+                    <div className="d-grid m-0">
                       <button
-                        class="btn btn-outline-primary"
+                        className="btn btn-outline-primary"
                         type="button"
                         onClick={() => {
                           deleteToken();
@@ -73,11 +77,11 @@ export default function Account() {
               </div>
             </div>
           </div>
-          <div class="col-12 col-lg-8 col-xl-9">
-            <div class="card widget-card border-light shadow-sm">
-              <div class="card-body p-4">
+          <div className="col-12 col-lg-8 col-xl-9">
+            <div className="card widget-card border-light shadow-sm">
+              <div className="card-body p-4">
                 <div>
-                  <h5 class="mb-3">Borrowed Books</h5>
+                  <h5 className="mb-3">Borrowed Books</h5>
                   <div className="row row-cols-4 gap-3">
                     {user?.reservations.length > 0 ? (
                       userBooks?.map((obj) => {
@@ -99,12 +103,17 @@ export default function Account() {
                                   {obj.author}
                                 </small>
                               </p>
+                              <div className="d-grid m-0">
+                                <button className="btn btn-outline-danger" onClick={() => returnBook({ token , reservationId: obj.id })}>Return Book</button>
+                              </div>
                             </div>
                           </div>
                         );
                       })
                     ) : (
-                      <h3>No books found!</h3>
+                      <div>
+                        <span>You Have No Borrowed Books!</span>
+                      </div>
                     )}
                   </div>
                 </div>

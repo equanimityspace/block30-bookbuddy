@@ -56,6 +56,7 @@ const libraryApi = api.injectEndpoints({
           Authorization: `Bearer ${token}`,
         },
       }),
+      providesTags: ['user']
     }),
 
     // Reservations
@@ -67,6 +68,7 @@ const libraryApi = api.injectEndpoints({
           Authorization: `Bearer ${token}`,
         },
       }),
+      providesTags: ['books']
     }),
 
     reserveBook: build.mutation({
@@ -80,16 +82,18 @@ const libraryApi = api.injectEndpoints({
           Authorization: `Bearer ${token}`,
         },
       }),
+      invalidatesTags: ['books']
     }),
 
     returnBook: build.mutation({
-      query: (token, { reservationId }) => ({
+      query: ({token, reservationId}) => ({
         url: `/reservations/${reservationId}`,
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
         },
       }),
+      invalidatesTags: ['books', 'user']
     }),
   }),
 });
