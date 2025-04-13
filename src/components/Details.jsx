@@ -8,10 +8,12 @@ import {
   useGetBookDetailsQuery,
   useReserveBookMutation,
 } from "../app/librarySlice";
+import { getToken } from "../app/tokenService";
 
-export default function SingleBook({ book, setBook }) {
+export default function SingleBook({ book }) {
   const [reserveBook] = useReserveBookMutation();
   const { data: bookDetail } = useGetBookDetailsQuery(book);
+  const token = getToken();
 
   let available = "";
   if (bookDetail?.available) {
@@ -60,19 +62,29 @@ export default function SingleBook({ book, setBook }) {
           </Carousel>
         </Row>
       </Container>
-      <Container className="d-flex justify-content-center mb-3">
-        <Row className="w-50">
-          <Col className="text-center">
-            <Button variant="success">Check In</Button>
-          </Col>
-          <Col className="text-center">
-            <Button variant="danger">Check Out</Button>
-          </Col>
-          <Col className="text-center">
-            <Button variant="primary">Home</Button>
-          </Col>
-        </Row>
-      </Container>
+      {token ? (
+        <Container className="d-flex justify-content-center mb-3">
+          <Row className="w-50">
+            <Col className="text-center">
+              <Button variant="success">Check In</Button>
+            </Col>
+            <Col className="text-center">
+              <Button variant="danger">Check Out</Button>
+            </Col>
+            <Col className="text-center">
+              <Button variant="primary">Home</Button>
+            </Col>
+          </Row>
+        </Container>
+      ) : (
+        <Container className="d-flex justify-content-center mb-3">
+          <Row className="w-50">
+            <Col className="text-center">
+              <Button variant="primary">Home</Button>
+            </Col>
+          </Row>
+        </Container>
+      )}
     </>
   );
 }
