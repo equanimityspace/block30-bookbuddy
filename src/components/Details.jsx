@@ -12,6 +12,13 @@ export default function SingleBook({ book, setBook }) {
   const [reserveBook] = useReserveBookMutation();
   const { data: bookDetail } = useGetBookDetailsQuery(book);
 
+  let available = "";
+  if (bookDetail?.available) {
+    available = "Available for check-out";
+  } else {
+    available = "Not available for check-out";
+  }
+
   return (
     <Container>
       <Row className="justify-content-md-center">
@@ -23,8 +30,8 @@ export default function SingleBook({ book, setBook }) {
               text="First slide"
             />
             <Carousel.Caption>
-              <h3>First slide label</h3>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+              <h3>{bookDetail?.title}</h3>
+              <p>{bookDetail?.author}</p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
@@ -34,8 +41,8 @@ export default function SingleBook({ book, setBook }) {
               text="Second slide"
             />
             <Carousel.Caption>
-              <h3>Second slide label</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <h3>Description</h3>
+              <p>{bookDetail?.description}</p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
@@ -45,10 +52,7 @@ export default function SingleBook({ book, setBook }) {
               text="Third slide"
             />
             <Carousel.Caption>
-              <h3>Third slide label</h3>
-              <p>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-              </p>
+              <h3>{available}</h3>
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>
