@@ -1,15 +1,58 @@
-import React, { useEffect } from "react";
-import { useGetBookDetailsQuery } from "../app/librarySlice";
+import Carousel from "react-bootstrap/Carousel";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
-export default function SingleBook({ book }) {
+import {
+  useGetBookDetailsQuery,
+  useReserveBookMutation,
+} from "../app/librarySlice";
+
+export default function SingleBook({ book, setBook }) {
+  const [reserveBook] = useReserveBookMutation();
   const { data: bookDetail } = useGetBookDetailsQuery(book);
 
-  console.log(bookDetail);
-
   return (
-    <div>
-      <h1>Single Book</h1>
-    </div>
+    <Container>
+      <Row className="justify-content-md-center">
+        <Carousel className="m-3">
+          <Carousel.Item>
+            <img
+              src={bookDetail?.coverimage}
+              className="carousel-image-fill"
+              text="First slide"
+            />
+            <Carousel.Caption>
+              <h3>First slide label</h3>
+              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              src={bookDetail?.coverimage}
+              className="carousel-image-fill"
+              text="Second slide"
+            />
+            <Carousel.Caption>
+              <h3>Second slide label</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              src={bookDetail?.coverimage}
+              className="carousel-image-fill"
+              text="Third slide"
+            />
+            <Carousel.Caption>
+              <h3>Third slide label</h3>
+              <p>
+                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+              </p>
+            </Carousel.Caption>
+          </Carousel.Item>
+        </Carousel>
+      </Row>
+    </Container>
   );
 }
-/* TODO - add your code to create a functional React component that renders details for a single book. Fetch the book data from the provided API. You may consider conditionally rendering a 'Checkout' button for logged in users. */
