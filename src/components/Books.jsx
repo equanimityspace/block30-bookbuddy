@@ -1,10 +1,16 @@
-export default function Books({ filteredBooks }) {
+import { Link } from "react-router-dom";
+
+export default function Books({ filteredBooks, setBook }) {
   return (
     <>
       <div className="m-5">
         <div className="row row-cols-4">
           {filteredBooks?.length > 0 ? (
             filteredBooks.map((obj) => {
+              // save ID for proper redirect if they click title
+              const bookId = obj.id;
+
+              // check if available
               let available = "";
               if (obj.available === true) {
                 available = "Available";
@@ -22,7 +28,9 @@ export default function Books({ filteredBooks }) {
                     <span className="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-primary">
                       {available}
                     </span>
-                    <h5 className="card-title">{obj.title}</h5>
+                    <Link to="/Details" onClick={() => setBook(bookId)}>
+                      <h5 className="card-title">{obj.title}</h5>
+                    </Link>
                     <p className="card-text">{obj.description}</p>
                     <p className="card-text">
                       <small className="text-body-secondary">
