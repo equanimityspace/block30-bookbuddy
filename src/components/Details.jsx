@@ -16,7 +16,7 @@ import {
 } from "../app/librarySlice";
 import { getToken } from "../app/tokenService";
 
-export default function SingleBook({ book }) {
+export default function Details({ book }) {
   // get slice components
   const [reserveBook, { isError: reserveError, isLoading: reserveLoading }] =
     useReserveBookMutation();
