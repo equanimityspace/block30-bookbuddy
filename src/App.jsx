@@ -10,7 +10,7 @@ import Details from "./components/Details";
 import Lost from "./components/Lost";
 
 function App() {
-  const [book, setBook] = useState(42);
+  const [book, setBook] = useState();
   const [filteredBooks, setFilteredBooks] = useState("");
 
   return (
@@ -18,8 +18,14 @@ function App() {
       <Navigations setFilteredBooks={setFilteredBooks} />
       <Routes>
         {/* No login needed */}
-        <Route path="/" element={<Books filteredBooks={filteredBooks} />} />
-        <Route path="/details" element={<Details book={book} />} />
+        <Route
+          path="/"
+          element={<Books filteredBooks={filteredBooks} setBook={setBook} />}
+        />
+        <Route
+          path="/details"
+          element={<Details book={book} setBook={setBook} />}
+        />
         <Route path="/lost" element={<Lost/>} />
 
         {/* must log in */}
