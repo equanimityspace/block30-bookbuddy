@@ -16,7 +16,7 @@ export default function SingleBook({ book, setBook }) {
   if (bookDetail?.available) {
     available = "Available for check-out";
   } else {
-    available = "Not available for check-out";
+    available = "Not available for check out";
   }
 
   return (
