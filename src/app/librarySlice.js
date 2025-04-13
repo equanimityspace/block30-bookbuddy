@@ -24,6 +24,7 @@ const libraryApi = api.injectEndpoints({
         url: `/books/${id}`,
         method: "GET",
       }),
+      providesTags: ["Book"],
     }),
 
     // Users
@@ -68,6 +69,7 @@ const libraryApi = api.injectEndpoints({
           Authorization: `Bearer ${token}`,
         },
       }),
+      providesTags: ["Book"],
     }),
 
     reserveBook: build.mutation({
@@ -81,7 +83,7 @@ const libraryApi = api.injectEndpoints({
           Authorization: `Bearer ${token}`,
         },
       }),
-      invalidatesTags: ["Books"],
+      invalidatesTags: ["Books", "Book"],
     }),
 
     returnBook: build.mutation({
@@ -92,7 +94,7 @@ const libraryApi = api.injectEndpoints({
           Authorization: `Bearer ${token}`,
         },
       }),
-      invalidatesTags: ["Books"],
+      invalidatesTags: ["Books", "Book"],
     }),
   }),
 });
