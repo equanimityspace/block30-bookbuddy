@@ -1,44 +1,6 @@
-import { useState, useEffect } from "react";
-import { useGetAllBooksQuery } from "../app/librarySlice";
-
-export default function Books() {
-  const { data: books } = useGetAllBooksQuery();
-
-  const [searchQuery, setSearchQuery] = useState("");
-  const [filteredBooks, setFilteredBooks] = useState(books);
-
-  useEffect(() => {
-    const lowerCaseQuery = searchQuery.toLowerCase().trim();
-
-    if (!lowerCaseQuery) {
-      setFilteredBooks(books);
-      return;
-    }
-
-    const results = books.filter((book) => {
-      const titleMatch = book.title.toLowerCase().includes(lowerCaseQuery);
-      const authorMatch = book.author.toLowerCase().includes(lowerCaseQuery);
-
-      // return true if the query matches any of the fields
-      return titleMatch || authorMatch;
-    });
-
-    setFilteredBooks(results);
-  }, [searchQuery, books]); // Re-run effect when query or book list changes
-
+export default function Books({ filteredBooks }) {
   return (
     <>
-      <div className="mt-5 ms-5 w-25">
-        <input
-          type="text"
-          className="form-control"
-          id="bookSearch"
-          placeholder="Find a book by title or author"
-          onChange={(e) => {
-            setSearchQuery(e.target.value);
-          }}
-        />
-      </div>
       <div className="m-5">
         <div className="row row-cols-4">
           {filteredBooks?.length > 0 ? (
