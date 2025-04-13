@@ -1,5 +1,4 @@
 import api from "../api/api";
-import { createSlice } from "@reduxjs/toolkit";
 
 const libraryApi = api.injectEndpoints({
   endpoints: (build) => ({
@@ -94,34 +93,6 @@ const libraryApi = api.injectEndpoints({
     }),
   }),
 });
-
-// Store Token in local storage
-const storeToken = (state, { payload }) => {
-  localStorage.setItem("token", payload.token);
-};
-
-// stores the token from register api call
-const registerSlice = createSlice({
-  name: "register",
-  initialState: {},
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addMatcher(api.endpoints.register.matchFulfilled, storeToken);
-  },
-});
-
-// stores the token from login api call
-const loginSlice = createSlice({
-  name: "login",
-  initialState: {},
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addMatcher(api.endpoints.login.matchFulfilled, storeToken);
-  },
-});
-
-export const registerReducer = registerSlice.reducer;
-export const loginReducer = loginSlice.reducer;
 
 export const {
   useGetAllBooksQuery,
