@@ -161,7 +161,7 @@ export default function Details({ book }) {
         </Container>
       )}
       {/* Variable modal feedback */}
-      {actionError === "" ? (
+      {!returnError && !reserveError ? (
         <InfoModal
           show={show}
           hide={closeModal}
@@ -173,7 +173,7 @@ export default function Details({ book }) {
           show={show}
           hide={closeModal}
           heading="Error"
-          body={actionError}
+          body="An error has occurred, please try again later"
         />
       )}
       ;
