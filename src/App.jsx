@@ -10,9 +10,6 @@ import SingleBook from "./components/SingleBook";
 
 function App() {
   const [book, setBook] = useState(42);
-  const [token, setToken] = useState(
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAxMzcsImVtYWlsIjoiZW1haWwxMjQwMTIzNDlAZ21haWwuY29tIiwiaWF0IjoxNzQ0MzkzOTEzLCJleHAiOjE3NDQ5OTg3MTN9.i3LPCgpfG8stA353jBmEcTdssanEsoLifSEwUIUDajQ"
-  );
 
   return (
     <>
@@ -23,7 +20,7 @@ function App() {
         <Route path="/singleBook" element={<SingleBook book={book} />} />
 
         {/* must log in */}
-        <Route path="/account" element={<Account token={token} />} />
+        <Route path="/account" element={<Account />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
