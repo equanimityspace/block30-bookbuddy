@@ -16,7 +16,7 @@ export default function Navigations({ setFilteredBooks }) {
 
   const { data: books } = useGetAllBooksQuery();
   const [searchQuery, setSearchQuery] = useState("");
-  // please I hope I didnt break git
+
   useEffect(() => {
     const lowerCaseQuery = searchQuery.toLowerCase().trim();
 
