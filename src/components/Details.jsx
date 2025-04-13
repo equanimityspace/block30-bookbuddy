@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import Carousel from "react-bootstrap/Carousel";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -72,7 +74,9 @@ export default function SingleBook({ book }) {
               <Button variant="danger">Check Out</Button>
             </Col>
             <Col className="text-center">
-              <Button variant="primary">Home</Button>
+              <Link to="/">
+                <Button variant="primary">Home</Button>
+              </Link>
             </Col>
           </Row>
         </Container>
@@ -80,7 +84,9 @@ export default function SingleBook({ book }) {
         <Container className="d-flex justify-content-center mb-3">
           <Row className="w-50">
             <Col className="text-center">
-              <Button variant="primary">Home</Button>
+              <Link to="/">
+                <Button variant="primary">Home</Button>
+              </Link>
             </Col>
           </Row>
         </Container>
