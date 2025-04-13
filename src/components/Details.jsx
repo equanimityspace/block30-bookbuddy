@@ -19,7 +19,8 @@ import { getToken } from "../app/tokenService";
 export default function SingleBook({ book }) {
   // get slice components
   const [reserveBook] = useReserveBookMutation();
-  const [returnBook] = useReturnBookMutation();
+  const [returnBook, { isError: returnError, isLoading }] =
+    useReturnBookMutation();
 
   const { data: bookDetail } = useGetBookDetailsQuery(book);
 
@@ -131,12 +132,21 @@ export default function SingleBook({ book }) {
         </Container>
       )}
       {/* Variable modal feedback */}
-      <InfoModal
-        show={show}
-        hide={closeModal}
-        heading="Success!"
-        body="Book returned successfully!"
-      />
+      {!isLoading && !returnError ? (
+        <InfoModal
+          show={show}
+          hide={closeModal}
+          heading="Success!"
+          body="Book returned successfully!"
+        />
+      ) : (
+        <InfoModal
+          show={show}
+          hide={closeModal}
+          heading="Error"
+          body={returnError}
+        />
+      )}
       ;
     </>
   );
