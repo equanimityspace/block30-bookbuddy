@@ -70,11 +70,11 @@ const libraryApi = api.injectEndpoints({
     }),
 
     reserveBook: build.mutation({
-      query: (token, { bookId }) => ({
+      query: ({ token, bookId }) => ({
         url: "/reservations",
         method: "POST",
         body: {
-          "application/json": bookId,
+          bookId: bookId,
         },
         headers: {
           Authorization: `Bearer ${token}`,

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import Carousel from "react-bootstrap/Carousel";
 import Container from "react-bootstrap/Container";
@@ -18,8 +18,9 @@ import { getToken } from "../app/tokenService";
 
 export default function SingleBook({ book }) {
   // get slice components
-  const [reserveBook] = useReserveBookMutation();
-  const [returnBook, { isError: returnError, isLoading }] =
+  const [reserveBook, { isError: reserveError, isLoading: reserveLoading }] =
+    useReserveBookMutation();
+  const [returnBook, { isError: returnError, isLoading: returnLoading }] =
     useReturnBookMutation();
 
   const { data: bookDetail } = useGetBookDetailsQuery(book);
@@ -49,10 +50,20 @@ export default function SingleBook({ book }) {
     available = "Not available for check out";
   }
 
-  // show modal
+  // modal functionality
+  const navigate = useNavigate();
+
   const [show, setShow] = useState(false);
   const openModal = () => setShow(true);
-  const closeModal = () => setShow(false);
+  const closeModal = () => {
+    setShow(false);
+    navigate("/");
+  };
+
+  // modal variables
+  const heading = "Success!";
+  const body = "Action completed succesfully";
+  let actionError = "";
 
   return (
     <>
@@ -102,7 +113,11 @@ export default function SingleBook({ book }) {
                 variant="success"
                 onClick={() => {
                   if (token && reservationId) {
-                    returnBook({ token, reservationId });
+                    try {
+                      returnBook({ token, reservationId });
+                    } catch (error) {
+                      actionError = error;
+                    }
                     openModal();
                   }
                 }}
@@ -111,7 +126,21 @@ export default function SingleBook({ book }) {
               </Button>
             </Col>
             <Col className="text-center">
-              <Button variant="danger">Check Out</Button>
+              <Button
+                variant="danger"
+                onClick={() => {
+                  if (token && bookId) {
+                    try {
+                      reserveBook({ token, bookId });
+                    } catch (error) {
+                      actionError = error;
+                    }
+                    openModal();
+                  }
+                }}
+              >
+                Check Out
+              </Button>
             </Col>
             <Col className="text-center">
               <Link to="/">
@@ -132,19 +161,19 @@ export default function SingleBook({ book }) {
         </Container>
       )}
       {/* Variable modal feedback */}
-      {!isLoading && !returnError ? (
+      {actionError === "" ? (
         <InfoModal
           show={show}
           hide={closeModal}
-          heading="Success!"
-          body="Book returned successfully!"
+          heading={heading}
+          body={body}
         />
       ) : (
         <InfoModal
           show={show}
           hide={closeModal}
           heading="Error"
-          body={returnError}
+          body={actionError}
         />
       )}
       ;
