@@ -18,10 +18,8 @@ import { getToken } from "../app/tokenService";
 
 export default function Details({ book }) {
   // get slice components
-  const [reserveBook, { isError: reserveError, isLoading: reserveLoading }] =
-    useReserveBookMutation();
-  const [returnBook, { isError: returnError, isLoading: returnLoading }] =
-    useReturnBookMutation();
+  const [reserveBook, { isError: reserveError }] = useReserveBookMutation();
+  const [returnBook, { isError: returnError }] = useReturnBookMutation();
 
   const { data: bookDetail } = useGetBookDetailsQuery(book);
 
@@ -161,7 +159,7 @@ export default function Details({ book }) {
         </Container>
       )}
       {/* Variable modal feedback */}
-      {actionError === "" ? (
+      {!returnError && !reserveError ? (
         <InfoModal
           show={show}
           hide={closeModal}
@@ -173,7 +171,7 @@ export default function Details({ book }) {
           show={show}
           hide={closeModal}
           heading="Error"
-          body={actionError}
+          body="An error has occurred, please try again later"
         />
       )}
       ;
