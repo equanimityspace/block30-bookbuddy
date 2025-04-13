@@ -1,10 +1,11 @@
 /* TODO - add your code to create a functional React component that renders a login form */
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../app/librarySlice";
 import { useState } from "react";
 
 export default function Login() {
   const [login] = useLoginMutation();
+  const navigate = useNavigate();
 
   // Stores data from login form
   const [formData, setFormData] = useState({
@@ -33,6 +34,8 @@ export default function Login() {
 
       // ********** FOR TESTING ONLY **********
       console.log("Login success, token: ", response.data.token);
+
+      navigate("/")
     } catch (error) {
       console.log("Login error: ", error);
     }
