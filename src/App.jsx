@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Navigations from "./components/Navigations";
 import Details from "./components/Details";
+import Lost from "./components/Lost";
 
 function App() {
   const [book, setBook] = useState(42);
@@ -19,6 +20,7 @@ function App() {
         {/* No login needed */}
         <Route path="/" element={<Books filteredBooks={filteredBooks} />} />
         <Route path="/details" element={<Details book={book} />} />
+        <Route path="/lost" element={<Lost/>} />
 
         {/* must log in */}
         <Route path="/account" element={<Account />} />
