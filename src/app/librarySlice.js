@@ -17,12 +17,14 @@ const libraryApi = api.injectEndpoints({
         url: "/books",
         method: "GET",
       }),
+      providesTags: ["Books"],
     }),
     getBookDetails: build.query({
       query: (id) => ({
         url: `/books/${id}`,
         method: "GET",
       }),
+      providesTags: ["Book"],
     }),
 
     // Users
@@ -67,29 +69,32 @@ const libraryApi = api.injectEndpoints({
           Authorization: `Bearer ${token}`,
         },
       }),
+      providesTags: ["Book"],
     }),
 
     reserveBook: build.mutation({
-      query: (token, { bookId }) => ({
+      query: ({ token, bookId }) => ({
         url: "/reservations",
         method: "POST",
         body: {
-          "application/json": bookId,
+          bookId: bookId,
         },
         headers: {
           Authorization: `Bearer ${token}`,
         },
       }),
+      invalidatesTags: ["Books", "Book"],
     }),
 
     returnBook: build.mutation({
-      query: (token, { reservationId }) => ({
+      query: ({ token, reservationId }) => ({
         url: `/reservations/${reservationId}`,
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
         },
       }),
+      invalidatesTags: ["Books", "Book"],
     }),
   }),
 });
