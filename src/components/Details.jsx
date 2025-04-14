@@ -63,7 +63,9 @@ export default function Details({ book }) {
   const [errorReturn, setErrorReturn] = useState(null);
   const returnBookFunc = async () => {
     const response = await returnBook({ token, reservationId });
-    setErrorReturn(response.error.data.message);
+    try {
+      setErrorCheckOut(response.error.data.message);
+    } catch {}
     openModal();
   };
 
@@ -72,7 +74,9 @@ export default function Details({ book }) {
   const [errorCheckOut, setErrorCheckOut] = useState(null);
   const reserveBookFunc = async () => {
     const response = await reserveBook({ token, bookId });
-    setErrorCheckOut(response.error.data.message);
+    try {
+      setErrorCheckOut(response.error.data.message);
+    } catch {}
     openModal();
   };
 
@@ -149,12 +153,15 @@ export default function Details({ book }) {
       )}
       {/* Variable modal feedback */}
       {!boolReturnError && !boolReserveError ? (
-        <InfoModal
-          show={show}
-          hide={closeModal}
-          heading={heading}
-          body={body}
-        />
+        (console.log("in success"),
+        (
+          <InfoModal
+            show={show}
+            hide={closeModal}
+            heading={heading}
+            body={body}
+          />
+        ))
       ) : (
         <InfoModal
           show={show}
