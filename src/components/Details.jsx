@@ -17,13 +17,9 @@ import {
 import { getToken } from "../app/tokenService";
 
 export default function Details({ book }) {
-  // get slice components
-  const [reserveBook, { isError: reserveError }] = useReserveBookMutation();
-  const [returnBook, { isError: returnError }] = useReturnBookMutation();
-
-  const { data: bookDetail } = useGetBookDetailsQuery(book);
-
+  // get token and book data
   const token = getToken();
+  const { data: bookDetail } = useGetBookDetailsQuery(book);
   const { data: bookReservation } = useGetReservationsQuery(token);
 
   // get book Id
@@ -61,7 +57,28 @@ export default function Details({ book }) {
   // modal variables
   const heading = "Success!";
   const body = "Action completed succesfully";
-  let actionError = "";
+
+  // return a book
+  const [returnBook, { isError: boolReturnError }] = useReturnBookMutation();
+  const [errorReturn, setErrorReturn] = useState(null);
+  const returnBookFunc = async () => {
+    try {
+      const response = await returnBook({ token, reservationId });
+      setErrorReturn(response.error.data.message);
+      openModal();
+    } catch (error) {}
+  };
+
+  // check out a book
+  const [reserveBook, { isError: boolReserveError }] = useReserveBookMutation();
+  const [errorCheckOut, setErrorCheckOut] = useState(null);
+  const reserveBookFunc = async () => {
+    try {
+      const response = await reserveBook({ token, bookId });
+      setErrorCheckOut(response.error.data.message);
+      openModal();
+    } catch (error) {}
+  };
 
   return (
     <>
@@ -107,36 +124,12 @@ export default function Details({ book }) {
         <Container className="d-flex justify-content-center mb-3">
           <Row className="w-50">
             <Col className="text-center">
-              <Button
-                variant="success"
-                onClick={() => {
-                  if (token && reservationId) {
-                    try {
-                      returnBook({ token, reservationId });
-                    } catch (error) {
-                      actionError = error;
-                    }
-                    openModal();
-                  }
-                }}
-              >
+              <Button variant="success" onClick={returnBookFunc}>
                 Return
               </Button>
             </Col>
             <Col className="text-center">
-              <Button
-                variant="danger"
-                onClick={() => {
-                  if (token && bookId) {
-                    try {
-                      reserveBook({ token, bookId });
-                    } catch (error) {
-                      actionError = error;
-                    }
-                    openModal();
-                  }
-                }}
-              >
+              <Button variant="danger" onClick={reserveBookFunc}>
                 Check Out
               </Button>
             </Col>
@@ -159,7 +152,7 @@ export default function Details({ book }) {
         </Container>
       )}
       {/* Variable modal feedback */}
-      {!returnError && !reserveError ? (
+      {!boolReturnError && !boolReserveError ? (
         <InfoModal
           show={show}
           hide={closeModal}
@@ -171,7 +164,7 @@ export default function Details({ book }) {
           show={show}
           hide={closeModal}
           heading="Error"
-          body="An error has occurred, please try again later"
+          body={errorReturn || errorCheckOut}
         />
       )}
       ;
