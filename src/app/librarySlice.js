@@ -2,15 +2,6 @@ import api from "../api/api";
 
 const libraryApi = api.injectEndpoints({
   endpoints: (build) => ({
-    // get all books (GET) - Done - Test(Pass)
-    // get book details (GET) - Done - Test(Pass)
-    // login (POST) - Done - Test(Pass)
-    // register (POST) - Done - Test(Pass) // make sure its not passing in an object
-    // account details (GET) - Done - Test(Pass)
-    // get user reservations (GET) - Done
-    // reserve book (POST) - Done
-    // return book (DELETE) - Done
-
     // Books
     getAllBooks: build.query({
       query: () => ({
@@ -51,49 +42,37 @@ const libraryApi = api.injectEndpoints({
       }),
     }),
     getUser: build.query({
-      query: (token) => ({
+      query: () => ({
         url: "/users/me",
         method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       }),
       providesTags: ["User"],
     }),
 
     // Reservations
     getReservations: build.query({
-      query: (token) => ({
+      query: () => ({
         url: "/reservations",
         method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       }),
       providesTags: ["Books"],
     }),
 
     reserveBook: build.mutation({
-      query: ({ token, bookId }) => ({
+      query: ({ bookId }) => ({
         url: "/reservations",
         method: "POST",
         body: {
           bookId: bookId,
-        },
-        headers: {
-          Authorization: `Bearer ${token}`,
         },
       }),
       invalidatesTags: ["Books", "User"],
     }),
 
     returnBook: build.mutation({
-      query: ({ token, reservationId }) => ({
+      query: ({ reservationId }) => ({
         url: `/reservations/${reservationId}`,
         method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       }),
       invalidatesTags: ["Books", "User"],
     }),
