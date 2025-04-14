@@ -25,7 +25,7 @@ export default function Navigations({ setFilteredBooks }) {
       return;
     }
 
-    const results = books.filter((book) => {
+    const results = books?.filter((book) => {
       const titleMatch = book.title.toLowerCase().includes(lowerCaseQuery);
       const authorMatch = book.author.toLowerCase().includes(lowerCaseQuery);
 
