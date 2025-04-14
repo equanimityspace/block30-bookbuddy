@@ -153,7 +153,7 @@ export default function Details({ book }) {
       )}
       {/* Variable modal feedback */}
       {!boolReturnError && !boolReserveError ? (
-        (console.log("in success"),
+        (
         (
           <InfoModal
             show={show}
