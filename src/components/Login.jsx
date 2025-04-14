@@ -21,19 +21,12 @@ export default function Login() {
     }));
   };
 
-  // ********** FOR TESTING ONLY **********
-  // console.log("email: ", formData.email);
-  // console.log("password: ", formData.password);
-
   // Submit login request
   const submit = async (e) => {
     try {
       e.preventDefault();
 
       const response = await login(formData);
-
-      // ********** FOR TESTING ONLY **********
-      console.log("Login success, token: ", response.data.token);
 
       navigate("/")
     } catch (error) {
