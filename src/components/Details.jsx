@@ -39,9 +39,9 @@ export default function Details({ book }) {
   // check if book is available, I should have done this with a prop but I did not think ahead
   let available = "";
   if (bookDetail?.available) {
-    available = "Available for check-out";
+    available = "Available for checkout";
   } else {
-    available = "Not available for check out";
+    available = "Not available for checkout";
   }
 
   // modal functionality
@@ -84,7 +84,7 @@ export default function Details({ book }) {
     <>
       <Container>
         <Row>
-          <Carousel className="m-3">
+          <Carousel className="carousel">
             <Carousel.Item>
               <img
                 src={bookDetail?.coverimage}

@@ -53,7 +53,7 @@ export default function Navigations({ setFilteredBooks }) {
           <input
             className="form-control mr-sm-2"
             type="search"
-            placeholder="Search book by title or author"
+            placeholder="Search by title or author"
             aria-label="Search"
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -64,7 +64,7 @@ export default function Navigations({ setFilteredBooks }) {
       </nav>
       <nav className="mininav">
         <h1> {pageTitle} </h1>
-        <NavLink to="/login"> Log-in </NavLink>
+        <NavLink to="/login"> Login </NavLink>
         <NavLink to="/register"> Sign-up </NavLink>
         <div className="mininav dropdown">
           <NavLink

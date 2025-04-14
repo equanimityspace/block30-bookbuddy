@@ -26,7 +26,7 @@ function App() {
           path="/details"
           element={<Details book={book} setBook={setBook} />}
         />
-        <Route path="/lost" element={<Lost/>} />
+        <Route path="/lost" element={<Lost />} />
 
         {/* must log in */}
         <Route path="/account" element={<Account />} />

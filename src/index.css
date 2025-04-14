@@ -1,5 +1,5 @@
 body {
-  font-family: Georgia, serif;
+  /* font-family: Georgia, serif; */
   background-color: #f8f8f8;
   margin: 0;
   padding: 0;
@@ -12,6 +12,7 @@ body {
   background-color: #234f1ece;
   display: flex;
   justify-content: space-around;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 .navbar-brand {
   display: flex;
@@ -19,13 +20,13 @@ body {
 }
 .navbar-logo {
   height: auto;
-  width: 15%;
+  width: 100px;
   margin-left: 10px;
 }
 .navbar h1 {
   color: white;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: auto;
+  font-size: 250%;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 
 .searchbar {
@@ -36,7 +37,6 @@ body {
 }
 
 .searchbar input {
-  flex: 1;
   min-width: 300px;
   padding: 0.5rem;
 }
@@ -51,6 +51,8 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 .mininav h1 {
+  margin: 5px;
+  margin-left: 10px;
   font-size: medium;
 }
 
@@ -70,14 +72,15 @@ body {
 } */
 
 /* details.jsx */
+.carousel {
+  margin: 10px;
+}
 .carousel-item {
   aspect-ratio: 16 / 9;
   overflow: hidden; /* stop content from overflowing */
-
   position: relative; /* needed to put a tint over images */
 }
 
-/* darken */
 .carousel-item::after {
   content: ""; /* no idea */
   position: absolute;
@@ -106,16 +109,15 @@ body {
 /* Books.jsx */
 .home-title {
   margin-top: 40px;
-  margin-left: 40px;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 2.5vw;
+  margin-left: 50px;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 .all-books-display {
   display: grid;
   grid-template-columns: repeat(
     4,
     minmax(200px, 1fr)
-  ); /* or fixed 4: repeat(4, 1fr) */
+  ); /*fixed 4: repeat(4, 1fr) */
   gap: 20px;
   justify-content: center;
   margin: 30px;
