@@ -1,16 +1,15 @@
 import { useGetReservationsQuery, useGetUserQuery, useReturnBookMutation } from "../app/librarySlice";
-import { getToken, deleteToken } from "../app/tokenService";
+import { deleteToken } from "../app/tokenService";
 import { useNavigate } from "react-router-dom";
 
 export default function Account() {
-  const token = getToken();
   const navigate = useNavigate();
 
   // calls api to get user info
-  const { data: user } = useGetUserQuery(token);
+  const { data: user } = useGetUserQuery();
 
   // calls api to get user's book reservations
-  const { data: userBooks } = useGetReservationsQuery(token);
+  const { data: userBooks } = useGetReservationsQuery();
 
   // calls api to return book
   const [returnBook] = useReturnBookMutation();
@@ -97,7 +96,7 @@ export default function Account() {
                                 </small>
                               </p>
                               <div className="d-grid m-0">
-                                <button className="btn btn-outline-danger" onClick={() => returnBook({ token , reservationId: obj.id })}>Return Book</button>
+                                <button className="btn btn-outline-danger" onClick={() => returnBook({ reservationId: obj.id })}>Return Book</button>
                               </div>
                             </div>
                           </div>
