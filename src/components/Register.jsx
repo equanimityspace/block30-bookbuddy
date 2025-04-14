@@ -1,9 +1,18 @@
 /* TODO - add your code to create a functional React component that renders a registration form */
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useRegisterMutation } from "../app/librarySlice";
+import InfoModal from "./Modal";
 
 export default function Register() {
+  const [show, setShow] = useState(false);
+  
+  const [response, setResponse] = useState();
+  const navigate = useNavigate();
+  
+  const openModal = () => setShow(true);
+  const closeModal = () => setShow(false);
+
   const [register] = useRegisterMutation();
 
   // Stores data from register form
@@ -22,26 +31,23 @@ export default function Register() {
     }));
   };
 
-  // ********** FOR TESTING ONLY **********
-  // console.log("firstname: ", formData.firstname);
-  // console.log("lastname: ", formData.lastname);
-  // console.log("email: ", formData.email);
-  // console.log("password: ", formData.password);
-
   // Submit register request
   const submit = async (e) => {
     try {
       e.preventDefault();
 
       const response = await register(formData);
+      setResponse(response);
 
-      // ********** FOR TESTING ONLY **********
-      console.log("Register success, token: ", response.data.token);
-      console.log("first name: ", response.data.user.firstname);
-      console.log("last name: ", response.data.user.lastname);
-      console.log("email: ", response.data.user.email);
+      // if error opens popup, if not skip
+      openModal();
+      
+      // if user succesfully registers redirect to home page
+      if (response?.data) {
+        navigate("/");
+      }
+
     } catch (error) {
-      console.log("Register error: ", error);
     }
   };
 
@@ -86,6 +92,15 @@ export default function Register() {
           role="tabpanel"
           aria-labelledby="tab-login"
         >
+          {!response?.data ? 
+          (<InfoModal
+            show={show}
+            hide={closeModal}
+            heading={response?.error.status}
+            body={response?.error.data.message}
+          />): (
+            <></>
+          )}
           <form onSubmit={submit}>
             {/* <!-- First Name input --> */}
             <div className="form-floating mb-3">
