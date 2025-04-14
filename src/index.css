@@ -29,10 +29,16 @@ body {
 }
 
 .searchbar {
-  margin-right: 20px;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 10px;
+  margin-right: 20px;
+}
+
+.searchbar input {
+  flex: 1;
+  min-width: 300px;
+  padding: 0.5rem;
 }
 
 .mininav {
@@ -134,6 +140,6 @@ body {
 .card-text {
   margin: 10px;
 }
-.text-body-secondary{
+.text-body-secondary {
   margin-left: 10px;
 }
