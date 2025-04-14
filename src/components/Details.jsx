@@ -20,7 +20,7 @@ export default function Details({ book }) {
   // get token and book data
   const token = getToken();
   const { data: bookDetail } = useGetBookDetailsQuery(book);
-  const { data: bookReservation } = useGetReservationsQuery(token);
+  const { data: bookReservation } = useGetReservationsQuery();
 
   // get book Id
   const bookId = bookDetail?.id;
@@ -62,7 +62,7 @@ export default function Details({ book }) {
   const [returnBook, { isError: boolReturnError }] = useReturnBookMutation();
   const [errorReturn, setErrorReturn] = useState(null);
   const returnBookFunc = async () => {
-    const response = await returnBook({ token, reservationId });
+    const response = await returnBook({ reservationId });
     try {
       setErrorCheckOut(response.error.data.message);
     } catch {}
@@ -73,7 +73,7 @@ export default function Details({ book }) {
   const [reserveBook, { isError: boolReserveError }] = useReserveBookMutation();
   const [errorCheckOut, setErrorCheckOut] = useState(null);
   const reserveBookFunc = async () => {
-    const response = await reserveBook({ token, bookId });
+    const response = await reserveBook({ bookId });
     try {
       setErrorCheckOut(response.error.data.message);
     } catch {}
