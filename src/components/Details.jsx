@@ -62,22 +62,18 @@ export default function Details({ book }) {
   const [returnBook, { isError: boolReturnError }] = useReturnBookMutation();
   const [errorReturn, setErrorReturn] = useState(null);
   const returnBookFunc = async () => {
-    try {
-      const response = await returnBook({ token, reservationId });
-      setErrorReturn(response.error.data.message);
-      openModal();
-    } catch (error) {}
+    const response = await returnBook({ token, reservationId });
+    setErrorReturn(response.error.data.message);
+    openModal();
   };
 
   // check out a book
   const [reserveBook, { isError: boolReserveError }] = useReserveBookMutation();
   const [errorCheckOut, setErrorCheckOut] = useState(null);
   const reserveBookFunc = async () => {
-    try {
-      const response = await reserveBook({ token, bookId });
-      setErrorCheckOut(response.error.data.message);
-      openModal();
-    } catch (error) {}
+    const response = await reserveBook({ token, bookId });
+    setErrorCheckOut(response.error.data.message);
+    openModal();
   };
 
   return (
