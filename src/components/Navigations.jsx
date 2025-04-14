@@ -64,6 +64,8 @@ export default function Navigations({ setFilteredBooks }) {
       </nav>
       <nav className="mininav">
         <h1> {pageTitle} </h1>
+        <NavLink to="/login"> Log-in </NavLink>
+        <NavLink to="/register"> Sign-up </NavLink>
         <div className="mininav dropdown">
           <NavLink
             className="mininav-link dropdown-toggle"

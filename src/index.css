@@ -5,17 +5,7 @@ body {
   padding: 0;
 }
 
-#logo-image {
-  width: 30px;
-  margin-right: 10px;
-}
-
 /* Add your own custom styles here */
-
-/* Books.jsx */
-#card {
-  max-width: 40%;
-}
 
 /*Navbar styling*/
 .navbar {
@@ -136,4 +126,14 @@ body {
 .card img {
   width: auto;
   height: 30vh;
+}
+.card-title {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+.card-text {
+  margin: 10px;
+}
+.text-body-secondary{
+  margin-left: 10px;
 }

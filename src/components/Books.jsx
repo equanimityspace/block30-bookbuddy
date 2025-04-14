@@ -20,7 +20,7 @@ export default function Books({ filteredBooks, setBook }) {
             return (
               <div className="card" key={obj.id}>
                 <img src={obj.coverimage} alt={`The cover of ${obj.title}`} />
-                {/* <div className="card-body-text">
+                <div className="card-body-text">
                     <span className="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-primary">
                       {available}
                     </span>
@@ -28,12 +28,12 @@ export default function Books({ filteredBooks, setBook }) {
                       <h5 className="card-title">{obj.title}</h5>
                     </Link>
                     <p className="card-text">{obj.description}</p>
-                    <p className="card-text">
+                    {/* <p className="card-text"> */}
                       <small className="text-body-secondary">
                         {obj.author}
                       </small>
-                    </p>
-                  </div> */}
+                    {/* </p> */}
+                  </div>
               </div>
             );
           })
