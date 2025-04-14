@@ -63,7 +63,7 @@ export default function Account() {
                           // deletes the user token on logout
                           deleteToken();
                           
-                          // clears the stored cache on logout
+                          // refetch the user data stored cache on logout
                           dispatch(api.util.resetApiState());
                           
                           // return to home page
