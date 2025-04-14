@@ -21,19 +21,23 @@ export default function Books({ filteredBooks, setBook }) {
               <div className="card" key={obj.id}>
                 <img src={obj.coverimage} alt={`The cover of ${obj.title}`} />
                 <div className="card-body-text">
-                    <span className="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-primary">
+                  {obj.available ? (
+                    <span className="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-success">
                       {available}
                     </span>
-                    <Link to="/Details" onClick={() => setBook(bookId)}>
-                      <h5 className="card-title">{obj.title}</h5>
-                    </Link>
-                    <p className="card-text">{obj.description}</p>
-                    {/* <p className="card-text"> */}
-                      <small className="text-body-secondary">
-                        {obj.author}
-                      </small>
-                    {/* </p> */}
-                  </div>
+                  ) : (
+                    <span className="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-danger">
+                      {available}
+                    </span>
+                  )}
+                  <Link to="/Details" onClick={() => setBook(bookId)}>
+                    <h5 className="card-title">{obj.title}</h5>
+                  </Link>
+                  <p className="card-text">{obj.description}</p>
+                  {/* <p className="card-text"> */}
+                  <small className="text-body-secondary">{obj.author}</small>
+                  {/* </p> */}
+                </div>
               </div>
             );
           })
