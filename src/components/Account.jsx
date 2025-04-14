@@ -1,9 +1,12 @@
+import { useDispatch } from "react-redux";
+import api from "../api/api";
 import { useGetReservationsQuery, useGetUserQuery, useReturnBookMutation } from "../app/librarySlice";
 import { deleteToken } from "../app/tokenService";
 import { useNavigate } from "react-router-dom";
 
 export default function Account() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // calls api to get user info
   const { data: user } = useGetUserQuery();
@@ -57,7 +60,13 @@ export default function Account() {
                         className="btn btn-outline-primary"
                         type="button"
                         onClick={() => {
+                          // deletes the user token on logout
                           deleteToken();
+                          
+                          // clears the stored cache on logout
+                          dispatch(api.util.resetApiState());
+                          
+                          // return to home page
                           navigate("/");
                         }}
                       >
