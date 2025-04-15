@@ -168,7 +168,6 @@ export default function Details() {
           body={errorReturn || errorCheckOut}
         />
       )}
-      ;
     </div>
   );
 }
