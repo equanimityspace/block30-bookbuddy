@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
 
 import Carousel from "react-bootstrap/Carousel";
@@ -16,18 +17,18 @@ import {
 } from "../app/librarySlice";
 import { getToken } from "../app/tokenService";
 
-export default function Details({ book }) {
+export default function Details() {
   // get token and book data
   const token = getToken();
-  const { data: bookDetail } = useGetBookDetailsQuery(book);
-  const { data: bookReservation } = useGetReservationsQuery();
 
   // get book Id
-  const bookId = bookDetail?.id;
+  const { bookId } = useParams();
+  const { data: bookDetail } = useGetBookDetailsQuery(bookId);
 
   // get reservation object for matching book Id
+  const { data: bookReservation } = useGetReservationsQuery();
   const objReservation = bookReservation?.filter(
-    (book) => book.bookid === bookId
+    (book) => book.bookid == bookId
   );
 
   // extract reservation Id from rservation object
@@ -119,55 +120,54 @@ export default function Details({ book }) {
             </Carousel.Item>
           </Carousel>
         </Row>
-        {token ? (
-          <div className="d-flex justify-content-center mb-3">
-            <Row className="w-50">
-              <Col className="text-center">
-                <Button variant="success" onClick={returnBookFunc}>
-                  Return
-                </Button>
-              </Col>
-              <Col className="text-center">
-                <Button variant="danger" onClick={reserveBookFunc}>
-                  Check Out
-                </Button>
-              </Col>
-              <Col className="text-center">
-                <Link to="/">
-                  <Button variant="primary">Home</Button>
-                </Link>
-              </Col>
-            </Row>
-          </div>
-        ) : (
-          <div className="d-flex justify-content-center mb-3">
-            <Row className="w-50">
-              <Col className="text-center">
-                <Link to="/">
-                  <Button variant="primary">Home</Button>
-                </Link>
-              </Col>
-            </Row>
-          </div>
-        )}
-        {/* Variable modal feedback */}
-        {!boolReturnError && !boolReserveError ? (
-          <InfoModal
-            show={show}
-            hide={closeModal}
-            heading={heading}
-            body={body}
-          />
-        ) : (
-          <InfoModal
-            show={show}
-            hide={closeModal}
-            heading="Error"
-            body={errorReturn || errorCheckOut}
-          />
-        )}
-        ;
       </Container>
+      {token ? (
+        <Container className="d-flex justify-content-center mb-3">
+          <Row className="w-50">
+            <Col className="text-center">
+              <Button variant="success" onClick={returnBookFunc}>
+                Return
+              </Button>
+            </Col>
+            <Col className="text-center">
+              <Button variant="danger" onClick={reserveBookFunc}>
+                Check Out
+              </Button>
+            </Col>
+            <Col className="text-center">
+              <Link to="/">
+                <Button variant="primary">Home</Button>
+              </Link>
+            </Col>
+          </Row>
+        </Container>
+      ) : (
+        <Container className="d-flex justify-content-center mb-3">
+          <Row className="w-50">
+            <Col className="text-center">
+              <Link to="/">
+                <Button variant="primary">Home</Button>
+              </Link>
+            </Col>
+          </Row>
+        </Container>
+      )}
+      {/* Variable modal feedback */}
+      {!boolReturnError && !boolReserveError ? (
+        <InfoModal
+          show={show}
+          hide={closeModal}
+          heading={heading}
+          body={body}
+        />
+      ) : (
+        <InfoModal
+          show={show}
+          hide={closeModal}
+          heading="Error"
+          body={errorReturn || errorCheckOut}
+        />
+      )}
     </div>
   );
 }

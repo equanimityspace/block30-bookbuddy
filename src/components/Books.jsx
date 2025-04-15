@@ -1,15 +1,12 @@
 import { Link } from "react-router-dom";
 
-export default function Books({ filteredBooks, setBook }) {
+export default function Books({ filteredBooks }) {
   return (
     <>
       <h1 className="home-title">Our Library</h1>
       <div className="all-books-display">
         {filteredBooks?.length > 0 ? (
           filteredBooks.map((obj) => {
-            // save ID for proper redirect if they click title
-            const bookId = obj.id;
-
             // check if available
             let available = "";
             if (obj.available === true) {
@@ -30,13 +27,13 @@ export default function Books({ filteredBooks, setBook }) {
                       {available}
                     </span>
                   )}
-                  <Link to="/Details" onClick={() => setBook(bookId)}>
+                  <Link to={`/details/${obj.id}`}>
                     <h5 className="card-title">{obj.title}</h5>
                   </Link>
                   <p className="card-text">{obj.description}</p>
-                  {/* <p className="card-text"> */}
-                  <small className="text-body-secondary">{obj.author}</small>
-                  {/* </p> */}
+                  <p className="card-text">
+                    <small className="text-body-secondary">{obj.author}</small>
+                  </p>
                 </div>
               </div>
             );
