@@ -2,10 +2,18 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../app/librarySlice";
 import { useState } from "react";
+import InfoModal from "./Modal";
 
 export default function Login() {
-  const [login] = useLoginMutation();
+  const [show, setShow] = useState(false);
+  
+  const [response, setResponse] = useState();
   const navigate = useNavigate();
+
+  const openModal = () => setShow(true);
+  const closeModal = () => setShow(false);
+
+  const [login] = useLoginMutation();
 
   // Stores data from login form
   const [formData, setFormData] = useState({
@@ -27,10 +35,17 @@ export default function Login() {
       e.preventDefault();
 
       const response = await login(formData);
+      setResponse(response);
 
-      navigate("/")
+      // opens popup message
+      openModal();
+
+      // if login success return to home
+      if (response?.data) {
+        navigate("/");
+      }
     } catch (error) {
-      console.log("Login error: ", error);
+      console.error(error);
     }
   };
 
@@ -74,6 +89,16 @@ export default function Login() {
           role="tabpanel"
           aria-labelledby="tab-login"
         >
+          {!response?.data ? (
+            <InfoModal
+              show={show}
+              hide={closeModal}
+              heading={response?.error.status}
+              body={response?.error.data.message}
+            />
+          ) : (
+            <></>
+          )}
           <form onSubmit={submit}>
             {/* <!-- Email input --> */}
             <div className="form-floating mb-3">
