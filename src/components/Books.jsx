@@ -28,7 +28,7 @@ export default function Books({ filteredBooks, setBook }) {
                     <span className="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-primary">
                       {available}
                     </span>
-                    <Link to="/Details" onClick={() => setBook(bookId)}>
+                    <Link to={`/details/${obj.id}`}>
                       <h5 className="card-title">{obj.title}</h5>
                     </Link>
                     <p className="card-text">{obj.description}</p>

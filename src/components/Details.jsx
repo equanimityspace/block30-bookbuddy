@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
 
 import Carousel from "react-bootstrap/Carousel";
@@ -23,7 +24,7 @@ export default function Details({ book }) {
   const { data: bookReservation } = useGetReservationsQuery();
 
   // get book Id
-  const bookId = bookDetail?.id;
+  const { bookId } = useParams();
 
   // get reservation object for matching book Id
   const objReservation = bookReservation?.filter(
@@ -153,15 +154,12 @@ export default function Details({ book }) {
       )}
       {/* Variable modal feedback */}
       {!boolReturnError && !boolReserveError ? (
-        (
-        (
-          <InfoModal
-            show={show}
-            hide={closeModal}
-            heading={heading}
-            body={body}
-          />
-        ))
+        <InfoModal
+          show={show}
+          hide={closeModal}
+          heading={heading}
+          body={body}
+        />
       ) : (
         <InfoModal
           show={show}
