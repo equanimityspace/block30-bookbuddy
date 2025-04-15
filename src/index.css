@@ -73,15 +73,18 @@ body {
 ----------------------------------------------------------
 
 /* details.jsx */
+/*
 .content-wrapper {
-  /* margin: 3% auto;
+   margin: 3% auto;
   padding: 30px;
   background-color: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   border-radius: 8px;
   max-width: 1000px; 
-  --> div does not appear currently */
+  --> div does not appear currently
 }
+*/
+
 .carousel {
   margin: 40px auto;
   padding: 20px;
