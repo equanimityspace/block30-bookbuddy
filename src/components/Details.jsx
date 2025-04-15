@@ -81,14 +81,14 @@ export default function Details({ book }) {
   };
 
   return (
-    <>
+    <div className="content-wrapper">
       <Container>
         <Row>
           <Carousel className="carousel">
             <Carousel.Item>
               <img
                 src={bookDetail?.coverimage}
-                className="carousel-image-fill"
+                className="carousel-image"
                 text="First slide"
               />
               <Carousel.Caption>
@@ -99,7 +99,7 @@ export default function Details({ book }) {
             <Carousel.Item>
               <img
                 src={bookDetail?.coverimage}
-                className="carousel-image-fill"
+                className="carousel-image"
                 text="Second slide"
               />
               <Carousel.Caption>
@@ -110,7 +110,7 @@ export default function Details({ book }) {
             <Carousel.Item>
               <img
                 src={bookDetail?.coverimage}
-                className="carousel-image-fill"
+                className="carousel-image"
                 text="Third slide"
               />
               <Carousel.Caption>
@@ -119,58 +119,55 @@ export default function Details({ book }) {
             </Carousel.Item>
           </Carousel>
         </Row>
-      </Container>
-      {token ? (
-        <Container className="d-flex justify-content-center mb-3">
-          <Row className="w-50">
-            <Col className="text-center">
-              <Button variant="success" onClick={returnBookFunc}>
-                Return
-              </Button>
-            </Col>
-            <Col className="text-center">
-              <Button variant="danger" onClick={reserveBookFunc}>
-                Check Out
-              </Button>
-            </Col>
-            <Col className="text-center">
-              <Link to="/">
-                <Button variant="primary">Home</Button>
-              </Link>
-            </Col>
-          </Row>
-        </Container>
-      ) : (
-        <Container className="d-flex justify-content-center mb-3">
-          <Row className="w-50">
-            <Col className="text-center">
-              <Link to="/">
-                <Button variant="primary">Home</Button>
-              </Link>
-            </Col>
-          </Row>
-        </Container>
-      )}
-      {/* Variable modal feedback */}
-      {!boolReturnError && !boolReserveError ? (
-        (
-        (
+        {token ? (
+          <div className="d-flex justify-content-center mb-3">
+            <Row className="w-50">
+              <Col className="text-center">
+                <Button variant="success" onClick={returnBookFunc}>
+                  Return
+                </Button>
+              </Col>
+              <Col className="text-center">
+                <Button variant="danger" onClick={reserveBookFunc}>
+                  Check Out
+                </Button>
+              </Col>
+              <Col className="text-center">
+                <Link to="/">
+                  <Button variant="primary">Home</Button>
+                </Link>
+              </Col>
+            </Row>
+          </div>
+        ) : (
+          <div className="d-flex justify-content-center mb-3">
+            <Row className="w-50">
+              <Col className="text-center">
+                <Link to="/">
+                  <Button variant="primary">Home</Button>
+                </Link>
+              </Col>
+            </Row>
+          </div>
+        )}
+        {/* Variable modal feedback */}
+        {!boolReturnError && !boolReserveError ? (
           <InfoModal
             show={show}
             hide={closeModal}
             heading={heading}
             body={body}
           />
-        ))
-      ) : (
-        <InfoModal
-          show={show}
-          hide={closeModal}
-          heading="Error"
-          body={errorReturn || errorCheckOut}
-        />
-      )}
-      ;
-    </>
+        ) : (
+          <InfoModal
+            show={show}
+            hide={closeModal}
+            heading="Error"
+            body={errorReturn || errorCheckOut}
+          />
+        )}
+        ;
+      </Container>
+    </div>
   );
 }
