@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { getToken } from "../app/tokenService";
 import "../index.css";
 
 import { useGetAllBooksQuery } from "../app/librarySlice";
 
 export default function Navigations({ setFilteredBooks }) {
+  // get token if it exists
+  const token = getToken();
+
   const location = useLocation();
   const titles = {
     "/": "Welcome!",
@@ -53,7 +57,7 @@ export default function Navigations({ setFilteredBooks }) {
           <input
             className="form-control mr-sm-2"
             type="search"
-            placeholder="Search book by title or author"
+            placeholder="Search by title or author"
             aria-label="Search"
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -64,24 +68,28 @@ export default function Navigations({ setFilteredBooks }) {
       </nav>
       <nav className="mininav">
         <h1> {pageTitle} </h1>
-        <div className="mininav dropdown">
-          <NavLink
-            className="mininav-link dropdown-toggle"
-            to="/account"
-            id="mininavDropdown"
-            role="button"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            My Account
-          </NavLink>
-          <div className="dropdown-menu" aria-labelledby="mininavDropdown">
-            <NavLink className="mininav-item" to="/mybooks">
-              My Books
+        {token === null ? (
+          <NavLink to="/login"> Login / Sign Up </NavLink>
+        ) : (
+          <div className="mininav dropdown">
+            <NavLink
+              className="mininav-link dropdown-toggle"
+              to="/account"
+              id="mininavDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              My Account
             </NavLink>
+            <div className="dropdown-menu" aria-labelledby="mininavDropdown">
+              <NavLink className="mininav-item" to="/mybooks">
+                My Books
+              </NavLink>
+            </div>
           </div>
-        </div>
+        )}
       </nav>
     </div>
   );
