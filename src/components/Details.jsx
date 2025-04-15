@@ -17,18 +17,18 @@ import {
 } from "../app/librarySlice";
 import { getToken } from "../app/tokenService";
 
-export default function Details({ book }) {
+export default function Details() {
   // get token and book data
   const token = getToken();
-  const { data: bookDetail } = useGetBookDetailsQuery(book);
-  const { data: bookReservation } = useGetReservationsQuery();
 
   // get book Id
   const { bookId } = useParams();
+  const { data: bookDetail } = useGetBookDetailsQuery(bookId);
 
   // get reservation object for matching book Id
+  const { data: bookReservation } = useGetReservationsQuery();
   const objReservation = bookReservation?.filter(
-    (book) => book.bookid === bookId
+    (book) => book.bookid == bookId
   );
 
   // extract reservation Id from rservation object
