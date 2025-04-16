@@ -39,7 +39,7 @@ body {
 }
 
 .mininav {
-  background-color: #9b9b9bad;
+  background-color: #9b9b9b98;
   color: white;
   display: flex;
   justify-content: space-between;
@@ -156,9 +156,6 @@ body {
 }
 
 /* Account Page*/
-.account-layout {
-  /*idk why, but if i delete this class, it destroys the page-- do not touch please*/
-}
 .acct-container {
   font-family: Georgia, "Times New Roman", Times, serif;
   display: flex;
@@ -195,7 +192,7 @@ body {
 }
 .userInfo-profilePic {
   text-align: center;
-  margin: 1rem;
+  margin: 1.5rem;
   fill: #6c757d7c;
 }
 .userInfo-name {
@@ -208,7 +205,7 @@ body {
   font-size: 0.9rem;
   color: #555;
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
 }
 .userInfo-bbStat {
   list-style: none;
