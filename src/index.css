@@ -1,11 +1,8 @@
 body {
-  /* font-family: Georgia, serif; */
-  background-color: #f8f8f8;
+  background-color: #fffbf3;
   margin: 0;
   padding: 0;
 }
-
-/* Add your own custom styles here */
 
 /*Navbar styling*/
 .navbar {
@@ -42,7 +39,7 @@ body {
 }
 
 .mininav {
-  background-color: #9b9b9bad;
+  background-color: #9b9b9b98;
   color: white;
   display: flex;
   justify-content: space-between;
@@ -70,23 +67,20 @@ body {
 /* .dropdown-menu {
   font-size: small;
 } */
-----------------------------------------------------------
 
+----------------------------------------------------------
 /* details.jsx */
-/*
 .content-wrapper {
-   margin: 3% auto;
   padding: 30px;
-  background-color: white;
+  /* background-color: rgb(81, 255, 12); */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   border-radius: 8px;
-  max-width: 1000px; 
-  --> div does not appear currently
+  max-width: 1000px;
+  /* --> div does not appear currently */
 }
-*/
 
 .carousel {
-  margin: 40px auto;
+  margin: 1.5rem auto;
   padding: 20px;
   max-width: 800px;
   background-color: white;
@@ -94,7 +88,6 @@ body {
   border-radius: 5px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
-
 .carousel-image {
   width: 50%;
   height: 75vh;
@@ -103,7 +96,6 @@ body {
   display: block;
   justify-content: center;
 }
-
 .carousel-item::after {
   content: "";
   position: absolute;
@@ -111,10 +103,8 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
   z-index: 1;
 }
-
 .carousel-caption {
   width: 40%;
   margin: 0 auto;
@@ -127,28 +117,26 @@ body {
   color: rgb(255, 255, 255);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(100%);
+}
 
 ----------------------------------------------------
-
 /* Books.jsx */
 .home-title {
   margin-top: 40px;
-  margin-left: 50px;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  margin-left: 100px;
 }
 .all-books-display {
   display: grid;
-  grid-template-columns: repeat(
-    4,
-    minmax(200px, 1fr)
-  ); /*fixed 4: repeat(4, 1fr) */
+  grid-template-columns: repeat(4, minmax(200px, 1fr));
   gap: 20px;
   justify-content: center;
   margin: 30px;
 }
 .card {
   height: 10vh;
-  background-color: rgb(55, 199, 12);
   margin: 20px;
   padding: 5px;
   display: flex;
@@ -166,6 +154,158 @@ body {
 .card-text {
   margin: 10px;
 }
-.text-body-secondary {
-  margin-left: 10px;
+
+/* Account Page*/
+.acct-container {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+  height: 65rem;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #fffbf3;
+}
+.userInfo-container {
+  background-color: #ffffff;
+  width: 20rem;
+  height: 30rem;
+  margin-top: 15px;
+  border-radius: 0.75rem;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.userInfo-header {
+  width: 100%;
+  color: white;
+  background: #234f1ece;
+  padding: 1rem;
+  font-size: 1.25rem;
+  text-align: center;
+  border-radius: 0.5rem;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.userInfo-profilePic {
+  text-align: center;
+  margin: 1.5rem;
+  fill: #6c757d7c;
+}
+.userInfo-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  text-align: center;
+}
+.userInfo-email {
+  font-size: 0.9rem;
+  color: #555;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.userInfo-bbStat {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.userInfo-bbStat span {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+}
+.acct-logoutBtn {
+  width: 100%;
+  color: #234f1ece;
+  background: none;
+  padding: 0.5rem 1rem;
+  border: 1.3px solid #234f1ece;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+.acct-logoutBtn:hover {
+  color: white;
+  background-color: #234f1ece;
+}
+
+.bb-container {
+  padding: 2rem;
+  border-radius: 0.75rem;
+}
+.bb-empty {
+  font-size: 1rem;
+  text-align: center;
+  color: #6c757d;
+  margin-top: 2rem;
+}
+.bb-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+.bb-display {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.bb-indvCard {
+  width: 20rem;
+  padding: 1rem;
+  background-color: none;
+  border: 0.5px solid #e0e0e0;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: wrap;
+  transition: transform 0.2s ease;
+}
+.bb-indvCard:hover {
+  transform: translateY(-4px);
+}
+
+.bb-indvCard img {
+  width: 150px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 0.25rem;
+}
+.bb-body {
+  margin: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.bb-bookTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: #222;
+}
+.bb-author {
+  font-size: 0.875rem;
+  color: #6c757d;
+  margin: 0.75rem 0;
+}
+
+.return-btn {
+  color: #dc3545;
+  background: none;
+  padding: 0.4rem 0.75rem;
+  margin-top: auto;
+  border: 1px solid #dc3545;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.return-btn:hover {
+  color: white;
+  background-color: #dc3545;
 }
