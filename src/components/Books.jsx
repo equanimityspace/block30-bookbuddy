@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 export default function Books({ filteredBooks }) {
   return (
     <>
-      <h1 className="home-title">Our Library</h1>
       <div className="all-books-display">
         {filteredBooks?.length > 0 ? (
           filteredBooks.map((obj) => {
